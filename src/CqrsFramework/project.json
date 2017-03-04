@@ -1,0 +1,28 @@
+{
+  "name": "CqrsFramework",
+  "version": "1.0.0-*",
+  "description": "",
+  "authors": [
+    "Jerry Bai<chinaren_bjr@163.com>"
+  ],
+  "buildOptions": {
+    "debugType": "portable"
+  },
+  "dependencies": {
+    "Newtonsoft.Json": "9.0.1",
+    "protobuf-net": "2.1.0"
+  },
+  "frameworks": {
+    "netstandard1.6": {
+      "dependencies": {
+        "NETStandard.Library": "1.6.0",
+        "System.Linq": "4.3.0",
+        "System.Reflection": "4.3.0",
+        "System.Runtime": "4.3.0",
+        "System.Runtime.Serialization.Formatters": "4.3.0",
+        "System.Threading": "4.3.0",
+        "System.Threading.Timer": "4.3.0"
+      }
+    }
+  }
+}
