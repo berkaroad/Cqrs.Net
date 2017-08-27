@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <DebugType>portable</DebugType>
+    <AssemblyName>CqrsFramework.Tests</AssemblyName>
+    <PackageId>CqrsFramework.Tests</PackageId>
+    <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
+    <RuntimeFrameworkVersion>2.0</RuntimeFrameworkVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Runtime.Serialization.Primitives" Version="4.3.0" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.2.0" />
+    <PackageReference Include="xunit" Version="2.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CqrsFramework\CqrsFramework.csproj" />
+    <ProjectReference Include="..\CqrsFramework.Autofac\CqrsFramework.Autofac.csproj" />
+    <ProjectReference Include="..\CqrsFramework.Dapper\CqrsFramework.Dapper.csproj" />
+    <ProjectReference Include="..\CqrsFramework.RabbitMQ\CqrsFramework.RabbitMQ.csproj" />
+  </ItemGroup>
+</Project>

@@ -15,7 +15,7 @@ namespace CqrsFramework.Serialization
                 // Allows deserializing to the actual runtime type
                 TypeNameHandling = TypeNameHandling.All,
                 // In a version resilient way
-                TypeNameAssemblyFormat = System.Runtime.Serialization.Formatters.FormatterAssemblyStyle.Simple
+                TypeNameAssemblyFormatHandling = TypeNameAssemblyFormatHandling.Simple
             }))
         {
         }
@@ -27,10 +27,12 @@ namespace CqrsFramework.Serialization
 
         public void Serialize(TextWriter writer, object graph)
         {
-            var jsonWriter = new JsonTextWriter(writer);
+            var jsonWriter = new JsonTextWriter(writer)
+            {
 #if DEBUG
-            jsonWriter.Formatting = Formatting.Indented;
+                Formatting = Formatting.Indented
 #endif
+            };
 
             this._serializer.Serialize(jsonWriter, graph);
 

@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <DebugType>portable</DebugType>
+    <AssemblyName>CqrsFramework.Dapper</AssemblyName>
+    <PackageId>CqrsFramework.Dapper</PackageId>
+    <NetStandardImplicitPackageVersion>2.0</NetStandardImplicitPackageVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Dapper" Version="1.50.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CqrsFramework\CqrsFramework.csproj" />
+  </ItemGroup>
+</Project>

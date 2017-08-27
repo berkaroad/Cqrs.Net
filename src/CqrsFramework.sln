@@ -1,0 +1,41 @@
+
+Microsoft Visual Studio Solution File, Format Version 15.00
+# Visual Studio 2017
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CqrsFramework", "CqrsFramework\CqrsFramework.csproj", "{F5B5B573-F2A5-477B-9DC1-BF86CCF97D52}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CqrsFramework.Tests", "CqrsFramework.Tests\CqrsFramework.Tests.csproj", "{2683A0AD-BCCF-488F-A9A7-CBB6E16CAA91}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CqrsFramework.Autofac", "CqrsFramework.Autofac\CqrsFramework.Autofac.csproj", "{A38C47BC-0A34-47F9-8454-D668D7989D7E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CqrsFramework.Dapper", "CqrsFramework.Dapper\CqrsFramework.Dapper.csproj", "{184A5266-664F-48D5-B811-C3232E95C211}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CqrsFramework.RabbitMQ", "CqrsFramework.RabbitMQ\CqrsFramework.RabbitMQ.csproj", "{87DDC6FB-12CC-4C71-A947-610AD89CFD67}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F5B5B573-F2A5-477B-9DC1-BF86CCF97D52}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5B5B573-F2A5-477B-9DC1-BF86CCF97D52}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5B5B573-F2A5-477B-9DC1-BF86CCF97D52}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5B5B573-F2A5-477B-9DC1-BF86CCF97D52}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2683A0AD-BCCF-488F-A9A7-CBB6E16CAA91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2683A0AD-BCCF-488F-A9A7-CBB6E16CAA91}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2683A0AD-BCCF-488F-A9A7-CBB6E16CAA91}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2683A0AD-BCCF-488F-A9A7-CBB6E16CAA91}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A38C47BC-0A34-47F9-8454-D668D7989D7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A38C47BC-0A34-47F9-8454-D668D7989D7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A38C47BC-0A34-47F9-8454-D668D7989D7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A38C47BC-0A34-47F9-8454-D668D7989D7E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{184A5266-664F-48D5-B811-C3232E95C211}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{184A5266-664F-48D5-B811-C3232E95C211}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{184A5266-664F-48D5-B811-C3232E95C211}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{184A5266-664F-48D5-B811-C3232E95C211}.Release|Any CPU.Build.0 = Release|Any CPU
+		{87DDC6FB-12CC-4C71-A947-610AD89CFD67}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87DDC6FB-12CC-4C71-A947-610AD89CFD67}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87DDC6FB-12CC-4C71-A947-610AD89CFD67}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87DDC6FB-12CC-4C71-A947-610AD89CFD67}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
