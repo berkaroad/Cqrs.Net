@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CqrsFramework.DynamicProxy.Emitter
+namespace CqrsFramework.DynamicProxy.Emitters
 {
     public enum ProxyTypeGenerateWay
     {

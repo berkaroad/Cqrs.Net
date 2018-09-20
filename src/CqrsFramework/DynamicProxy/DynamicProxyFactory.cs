@@ -23,8 +23,8 @@ namespace CqrsFramework.DynamicProxy
 
                 return new ProxyTypeWrapper
                 {
-                    ProxyType = new ProxyTypeGenerator(moduleBuilder, interfaceType, proxiedType).Generate(),
-                    Proxy2Type = new ProxyTypeGenerator2(moduleBuilder, interfaceType, proxiedType).Generate(),
+                    ProxyType = new ProxyTypeGenerator(moduleBuilder, interfaceType, proxiedType, ProxyTypeGenerateWay.ByNewObj).Generate(),
+                    Proxy2Type = new ProxyTypeGenerator(moduleBuilder, interfaceType, proxiedType, ProxyTypeGenerateWay.ByInstance).Generate(),
                     InterceptorTypes = interceptorTypes == null ? null : interceptorTypes.Where(i => typeof(IInterceptor).IsAssignableFrom(i)).Distinct().ToArray()
                 };
             }, (t, originVal) =>

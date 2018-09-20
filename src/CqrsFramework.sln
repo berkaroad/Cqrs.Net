@@ -1,5 +1,5 @@
 
-Microsoft Visual Studio Solution File, Format Version 15.00
+Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2017
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CqrsFramework", "CqrsFramework\CqrsFramework.csproj", "{F5B5B573-F2A5-477B-9DC1-BF86CCF97D52}"
 EndProject

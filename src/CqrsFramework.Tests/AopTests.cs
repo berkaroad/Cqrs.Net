@@ -11,7 +11,17 @@ namespace CqrsFramework.Tests
     {
         #region datas
 
-        public interface IUser
+        public interface IEater<T>
+        {
+            void Eat(T t);
+        }
+
+        public class Rice
+        {
+
+        }
+
+        public interface IUser : IEater<Rice>
         {
             void method1();
             int method2();
@@ -26,7 +36,7 @@ namespace CqrsFramework.Tests
             event EventHandler event1;
         }
 
-        [ServiceTypeConfig]
+        [ServiceTypeConfig(ServiceTypes = new Type[]{typeof(IUser)})]
         public class Supplier : IUser
         {
             public Supplier()
@@ -69,6 +79,11 @@ namespace CqrsFramework.Tests
             public int property2 { get; set; }
 
             public event EventHandler event1;
+
+            public void Eat(Rice rice)
+            {
+                Console.WriteLine("Supplier eat rice");
+            }
         }
 
         public class Saller : IUser
@@ -109,6 +124,11 @@ namespace CqrsFramework.Tests
             public void method5()
             {
                 // throw new NotImplementedException();
+            }
+
+            public void Eat(Rice rice)
+            {
+                Console.WriteLine("Saller eat rice");
             }
         }
 
@@ -192,8 +212,10 @@ namespace CqrsFramework.Tests
             var obj1 = DynamicProxyFactory.CreateProxy<IUser>(new Saller(), null);
             obj1.property2 = -9;
             Assert.Equal(-9, obj1.property2);
+            obj1.Eat(new Rice());
 
             var obj2 = DynamicProxyFactory.CreateProxyType(typeof(IUser), typeof(Supplier), null).ProxyType.GetConstructor(Type.EmptyTypes).Invoke(null);
+            
             var resolver = IocContainer.Instance.Resolve<IIocResolver>();
             var user1 = resolver.Resolve<IUser>();
 
@@ -201,6 +223,7 @@ namespace CqrsFramework.Tests
             var val2 = user1.property1;
             user1.property2 = -9;
             Assert.Equal(-9, user1.property2);
+            user1.Eat(new Rice());
         }
     }
 }

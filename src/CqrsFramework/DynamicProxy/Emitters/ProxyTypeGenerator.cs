@@ -12,14 +12,15 @@ namespace CqrsFramework.DynamicProxy.Emitters
         private Type _proxiedInterfaceType;
         private Type _cachedType;
 
-        public ProxyTypeGenerator(ModuleBuilder moduleBuilder, Type proxiedInterfaceType, Type proxiedType, string classNameSuffix)
+        public ProxyTypeGenerator(ModuleBuilder moduleBuilder, Type proxiedInterfaceType, Type proxiedType, ProxyTypeGenerateWay way)
         {
             _proxiedInterfaceType = proxiedInterfaceType;
             ProxiedType = proxiedType;
-            Builder = moduleBuilder.DefineType($"{proxiedType.Name}__{classNameSuffix}", TypeAttributes.Public | TypeAttributes.Sealed, null, new Type[]
+            Builder = moduleBuilder.DefineType($"{proxiedType.Name}__DynamicProxy{way}", TypeAttributes.Public | TypeAttributes.Sealed, null, new Type[]
             {
                 proxiedInterfaceType
             });
+            Way = way;
 
             var proxiedObjField = Builder.DefineField(Consts.PROXIED_OBJECT_FIELD_NAME, proxiedInterfaceType, FieldAttributes.Private);
             AddField(proxiedObjField);
@@ -30,6 +31,8 @@ namespace CqrsFramework.DynamicProxy.Emitters
         public Type ProxiedType { get; private set; }
 
         public TypeBuilder Builder { get; private set; }
+
+        public ProxyTypeGenerateWay Way { get; private set; }
 
         public FieldBuilder GetField(string fieldName)
         {
@@ -137,10 +140,16 @@ namespace CqrsFramework.DynamicProxy.Emitters
             if (_cachedType == null)
             {
                 // constructor
-                new ProxyConstructorEmitter(this).Emit(null);
-                foreach (var cctor in ProxiedType.GetConstructors(BindingFlags.Public | BindingFlags.Instance | BindingFlags.CreateInstance))
+                if (Way == ProxyTypeGenerateWay.ByNewObj)
                 {
-                    new ProxyConstructorEmitter(this).Emit(cctor);
+                    foreach (var cctor in ProxiedType.GetConstructors(BindingFlags.Public | BindingFlags.Instance | BindingFlags.CreateInstance))
+                    {
+                        new ProxyConstructorEmitter(this).Emit(cctor);
+                    }
+                }
+                else
+                {
+                    new ProxyConstructorEmitter(this).Emit(null);
                 }
 
                 AddMethods(_proxiedInterfaceType, ProxiedType, AddEvents(_proxiedInterfaceType, ProxiedType), AddProperties(_proxiedInterfaceType, ProxiedType));
