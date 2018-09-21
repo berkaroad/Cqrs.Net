@@ -68,12 +68,14 @@ namespace CqrsFramework.DynamicProxy.Emitters
 
             // Get proxiedObj's method
             generator.Emit(OpCodes.Ldtoken, proxiedTypeMethodInfo);
-            generator.Emit(OpCodes.Call, typeof(MethodBase).GetMethod("GetMethodFromHandle", new Type[] { typeof(RuntimeMethodHandle) }));
+            generator.Emit(OpCodes.Ldtoken, proxiedTypeMethodInfo.DeclaringType);
+            generator.Emit(OpCodes.Call, typeof(MethodBase).GetMethod("GetMethodFromHandle", new Type[] { typeof(RuntimeMethodHandle), typeof(RuntimeTypeHandle) }));
             generator.Emit(OpCodes.Stloc, methodInvocationTargetVar);
 
             // Get proxy's method
             generator.Emit(OpCodes.Ldtoken, method);
-            generator.Emit(OpCodes.Call, typeof(MethodBase).GetMethod("GetMethodFromHandle", new Type[] { typeof(RuntimeMethodHandle) }));
+            generator.Emit(OpCodes.Ldtoken, method.DeclaringType);
+            generator.Emit(OpCodes.Call, typeof(MethodBase).GetMethod("GetMethodFromHandle", new Type[] { typeof(RuntimeMethodHandle), typeof(RuntimeTypeHandle) }));
             generator.Emit(OpCodes.Stloc, methodVar);
 
             // Newobj DefaultInvocation

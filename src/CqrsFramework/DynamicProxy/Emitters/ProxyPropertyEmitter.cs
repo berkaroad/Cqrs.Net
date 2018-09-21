@@ -44,12 +44,14 @@ namespace CqrsFramework.DynamicProxy.Emitters
 
                 // Get proxiedObj's method
                 generator.Emit(OpCodes.Ldtoken, proxiedTypePropertyInfo.GetMethod);
-                generator.Emit(OpCodes.Call, typeof(MethodBase).GetMethod("GetMethodFromHandle", new Type[] { typeof(RuntimeMethodHandle) }));
+                generator.Emit(OpCodes.Ldtoken, proxiedTypePropertyInfo.GetMethod.DeclaringType);
+                generator.Emit(OpCodes.Call, typeof(MethodBase).GetMethod("GetMethodFromHandle", new Type[] { typeof(RuntimeMethodHandle), typeof(RuntimeTypeHandle) }));
                 generator.Emit(OpCodes.Stloc, methodInvocationTargetVar);
 
                 // Get proxy's method
                 generator.Emit(OpCodes.Ldtoken, getMethod);
-                generator.Emit(OpCodes.Call, typeof(MethodBase).GetMethod("GetMethodFromHandle", new Type[] { typeof(RuntimeMethodHandle) }));
+                generator.Emit(OpCodes.Ldtoken, getMethod.DeclaringType);
+                generator.Emit(OpCodes.Call, typeof(MethodBase).GetMethod("GetMethodFromHandle", new Type[] { typeof(RuntimeMethodHandle), typeof(RuntimeTypeHandle) }));
                 generator.Emit(OpCodes.Stloc, methodVar);
 
                 // Newobj DefaultInvocation
@@ -120,12 +122,14 @@ namespace CqrsFramework.DynamicProxy.Emitters
 
                 // Get proxiedObj's method
                 generator.Emit(OpCodes.Ldtoken, proxiedTypePropertyInfo.SetMethod);
-                generator.Emit(OpCodes.Call, typeof(MethodBase).GetMethod("GetMethodFromHandle", new Type[] { typeof(RuntimeMethodHandle) }));
+                generator.Emit(OpCodes.Ldtoken, proxiedTypePropertyInfo.SetMethod.DeclaringType);
+                generator.Emit(OpCodes.Call, typeof(MethodBase).GetMethod("GetMethodFromHandle", new Type[] { typeof(RuntimeMethodHandle), typeof(RuntimeTypeHandle) }));
                 generator.Emit(OpCodes.Stloc, methodInvocationTargetVar);
 
                 // Get proxy's method
                 generator.Emit(OpCodes.Ldtoken, setMethod);
-                generator.Emit(OpCodes.Call, typeof(MethodBase).GetMethod("GetMethodFromHandle", new Type[] { typeof(RuntimeMethodHandle) }));
+                generator.Emit(OpCodes.Ldtoken, setMethod.DeclaringType);
+                generator.Emit(OpCodes.Call, typeof(MethodBase).GetMethod("GetMethodFromHandle", new Type[] { typeof(RuntimeMethodHandle), typeof(RuntimeTypeHandle) }));
                 generator.Emit(OpCodes.Stloc, methodVar);
 
                 // Newobj DefaultInvocation
