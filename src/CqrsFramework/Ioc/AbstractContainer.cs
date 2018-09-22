@@ -5,9 +5,9 @@ namespace CqrsFramework.Ioc
 {
     public abstract class AbstractContainer : IContainer
     {
-        public abstract bool IsRegistered(Type serviceType);
+        public abstract bool IsRegistered(Type serviceType, string serviceName = null);
 
-        public virtual bool IsRegistered<TService>() where TService : class
+        public virtual bool IsRegistered<TService>(string serviceName = null) where TService : class
         {
             return IsRegistered(typeof(TService));
         }

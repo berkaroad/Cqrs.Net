@@ -6,14 +6,14 @@ namespace CqrsFramework.Ioc.Internal
     {
         public DefaultIocResolver() { }
 
-        public bool IsRegistered(Type serviceType)
+        public bool IsRegistered(Type serviceType, string serviceName = null)
         {
-            return IocContainer.Instance.IsRegistered(serviceType);
+            return IocContainer.Instance.IsRegistered(serviceType, serviceName);
         }
 
-        public bool IsRegistered<TService>() where TService : class
+        public bool IsRegistered<TService>(string serviceName = null) where TService : class
         {
-            return IocContainer.Instance.IsRegistered<TService>();
+            return IocContainer.Instance.IsRegistered<TService>(serviceName);
         }
 
         public object Resolve(Type serviceType)

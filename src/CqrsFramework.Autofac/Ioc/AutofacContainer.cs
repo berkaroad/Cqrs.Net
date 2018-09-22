@@ -13,9 +13,11 @@ namespace CqrsFramework.Ioc
             _container = new ContainerBuilder().Build(Autofac.Builder.ContainerBuildOptions.ExcludeDefaultModules);
         }
 
-        public override bool IsRegistered(Type serviceType)
+        public override bool IsRegistered(Type serviceType, string serviceName = null)
         {
-            return _container.IsRegistered(serviceType);
+            return string.IsNullOrEmpty(serviceName)
+                ? _container.IsRegistered(serviceType)
+                : _container.IsRegisteredWithName(serviceName, serviceType);
         }
 
         public override IContainer RegisterType(Type implementationType, string serviceName = null, LifetimeScope life = LifetimeScope.Singleton)
@@ -31,16 +33,7 @@ namespace CqrsFramework.Ioc
                 registrationBuilder.SingleInstance();
             }
 
-            if (IsRegistered(implementationType))
-            {
-                _container.ComponentRegistry.Registrations.Where(r => r.Services.Any(s =>
-                {
-                    var ts = s as Autofac.Core.TypedService;
-                    return ts != null && ts.ServiceType != implementationType;
-                })).ToList().ForEach(r => builder.RegisterComponent(r));
-                _container = builder.Build(Autofac.Builder.ContainerBuildOptions.ExcludeDefaultModules);
-            }
-            else
+            if (!IsRegistered(implementationType, serviceName))
             {
                 builder.Build().ComponentRegistry.Registrations.Where(r => r.Services.Any(s => s is Autofac.Core.TypedService)).ToList().ForEach(r => _container.ComponentRegistry.Register(r));
             }
@@ -56,16 +49,7 @@ namespace CqrsFramework.Ioc
                 registrationBuilder.Named<TService>(serviceName);
             }
 
-            if (IsRegistered<TService>())
-            {
-                _container.ComponentRegistry.Registrations.Where(r => r.Services.Any(s =>
-                {
-                    var ts = s as Autofac.Core.TypedService;
-                    return ts != null && ts.ServiceType != typeof(TService);
-                })).ToList().ForEach(r => builder.RegisterComponent(r));
-                _container = builder.Build(Autofac.Builder.ContainerBuildOptions.ExcludeDefaultModules);
-            }
-            else
+            if (!IsRegistered<TService>(serviceName))
             {
                 builder.Build().ComponentRegistry.Registrations.Where(r => r.Services.Any(s => s is Autofac.Core.TypedService)).ToList().ForEach(r => _container.ComponentRegistry.Register(r));
             }
@@ -85,16 +69,7 @@ namespace CqrsFramework.Ioc
                 registrationBuilder.SingleInstance();
             }
 
-            if (IsRegistered(serviceType))
-            {
-                _container.ComponentRegistry.Registrations.Where(r => r.Services.Any(s =>
-                {
-                    var ts = s as Autofac.Core.TypedService;
-                    return ts != null && ts.ServiceType != serviceType;
-                })).ToList().ForEach(r => builder.RegisterComponent(r));
-                _container = builder.Build(Autofac.Builder.ContainerBuildOptions.ExcludeDefaultModules);
-            }
-            else
+            if (!IsRegistered(serviceType, serviceName))
             {
                 builder.Build().ComponentRegistry.Registrations.Where(r => r.Services.Any(s => s is Autofac.Core.TypedService)).ToList().ForEach(r => _container.ComponentRegistry.Register(r));
             }

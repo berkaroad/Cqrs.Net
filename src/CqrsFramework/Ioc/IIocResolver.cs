@@ -4,9 +4,9 @@ namespace CqrsFramework.Ioc
 {
     public interface IIocResolver
     {
-        bool IsRegistered(Type serviceType);
+        bool IsRegistered(Type serviceType, string serviceName = null);
 
-        bool IsRegistered<TService>()
+        bool IsRegistered<TService>(string serviceName = null)
             where TService : class;
 
         TService Resolve<TService>()
